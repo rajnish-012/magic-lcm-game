@@ -1,56 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LCM Fun Game for Kids</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-<div class="game-container">
-    <h1>LCM Fun Game!</h1>
-    <div class="score-board">Score: <span id="score">0</span></div>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Slight tweak: added a meta description (a human might remember SEO halfway through) -->
+    <meta
+      name="description"
+      content="Fun LCM learning game for kids! Play, learn and earn stars!"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <div class="mascot-container">
-        <img id="mascot" src="https://cdn-icons-png.flaticon.com/512/3318/3318703.png" alt="mascot">
-    </div>
+    <title>🌟 LCM Fun Game for Kids 🌟</title>
 
-    <div class="card">
-        <p class="numbers-display">Numbers: <span id="num1"></span>, <span id="num2"></span></p>
-        <input type="number" id="lcmInput" placeholder="Enter the LCM" />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Using Font Awesome for icons, hope the link doesn’t break someday 😅 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>🌟 LCM Fun Game! 🌟</h1>
+      <div class="score-board">Score: <span id="score">0</span></div>
+
+      <!-- I might swap the mascot later -->
+      <div class="mascot-container">
+        <img
+          id="mascot"
+          src="https://cdn-icons-png.flaticon.com/512/3318/3318703.png"
+          alt="Game mascot"
+        />
+      </div>
+
+      <div class="card">
+        <p class="numbers-display">
+          Numbers: <span id="num1"></span>, <span id="num2"></span>
+        </p>
+
+        <input type="number" id="lcmInput" placeholder="Enter the LCM here" />
+
         <div class="buttons">
-            <button id="submitBtn"><i class="fa-solid fa-check"></i> Submit</button>
-            <button id="showStepsBtn"><i class="fa-solid fa-lightbulb"></i> Show Steps</button>
+          <!-- Note: maybe add keyboard shortcut later -->
+          <button id="submitBtn">
+            <i class="fa-solid fa-check"></i> Submit
+          </button>
+          <button id="showStepsBtn">
+            <i class="fa-solid fa-lightbulb"></i> Show Steps
+          </button>
         </div>
+
         <div id="feedback"></div>
         <div id="stars-container"></div>
+      </div>
+
+      <!-- Might rename this class, not sure if “next-btn” fits the style -->
+      <button id="nextBtn" class="next-btn">Next Numbers 🔄</button>
+
+      <!-- Placeholder for level badges -->
+      <div id="badge-container"></div>
+
+      <div class="lcm-info">
+        <h2>💡 What is LCM?</h2>
+        <p>
+          The LCM (Least Common Multiple) of two numbers is the smallest number
+          that is divisible by both numbers.
+        </p>
+        <p>
+          Example: LCM of 4 and 6 is 12 — because 12 is the smallest number
+          divisible by both 4 and 6.
+        </p>
+        <p>
+          Tip: Try listing multiples or use the GCD trick (if you remember it
+          😄)!
+        </p>
+      </div>
     </div>
 
-    <button id="nextBtn" class="next-btn">Next Numbers</button>
+    <footer>
+      Made with ❤️ by Rajnish
+      <a href="https://github.com/rajnish-012">GitHub</a>
+      <span class="star">⭐</span>
+      <span class="star" style="left: 50px">⭐</span>
+      <span class="star" style="left: 150px">⭐</span>
+    </footer>
 
-    <div id="badge-container"></div>
+    <!-- Canvas for confetti celebration -->
+    <canvas id="confetti"></canvas>
 
-    <div class="lcm-info">
-        <h2>What is LCM?</h2>
-        <p>The LCM (Least Common Multiple) of two numbers is the smallest number that can be divided by both numbers.</p>
-        <p>Example: The LCM of 4 and 6 is 12 because 12 is the smallest number that can be divided by both 4 and 6.</p>
-        <p>Tip: You can find it by listing multiples or using the GCD formula!</p>
-    </div>
-</div>
+    <!-- Sounds (could compress these later for faster load) -->
+    <audio
+      id="correctSound"
+      src="https://freesound.org/data/previews/341/341695_6260844-lq.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="wrongSound"
+      src="https://freesound.org/data/previews/109/109662_945474-lq.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="levelUpSound"
+      src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="buttonClick"
+      src="https://freesound.org/data/previews/256/256113_3263906-lq.mp3"
+      preload="auto"
+    ></audio>
 
-<footer>Created by <strong>Rajnish Kumar</strong> © 2025</footer>
+    <!-- Main script -->
+    <script src="script.js"></script>
 
-<!-- Confetti -->
-<canvas id="confetti"></canvas>
-
-<!-- Sounds -->
-<audio id="correctSound" src="https://freesound.org/data/previews/341/341695_6260844-lq.mp3" preload="auto"></audio>
-<audio id="wrongSound" src="https://freesound.org/data/previews/109/109662_945474-lq.mp3" preload="auto"></audio>
-<audio id="levelUpSound" src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3" preload="auto"></audio>
-<audio id="buttonClick" src="https://freesound.org/data/previews/256/256113_3263906-lq.mp3" preload="auto"></audio>
-
-<script src="script.js"></script>
-</body>
+    <!-- Note to self: maybe split confetti & sound logic later -->
+  </body>
 </html>
-
